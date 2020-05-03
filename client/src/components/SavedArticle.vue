@@ -3,7 +3,7 @@
     <div class="card">
       <img v-if="imageurl" :src="imageurl" alt />
       <div class="card-body">
-        <h4 class="card-title"><a :href="url">{{title}}</a></h4>
+        <h4 class="card-title"><a :href="url" target="_blank">{{title}}</a></h4>
         <h6 class="card-subtitle mb-2 text-muted">{{source}}</h6>
         <p class="card-text">{{description}}</p>
         <a v-on:click="destroy(id)"
