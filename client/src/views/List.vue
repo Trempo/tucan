@@ -1,6 +1,10 @@
 
 <template>
   <div>
+    <div class="container">
+      <h5 v-if="!articles.length">
+        Tu lista esta vacia. Añade lecturas desde Super para que crezca</h5>
+    </div>
     <SavedArticle v-for="article in articles" :key="article._id" :title="article.title"
     :description="article.description" :source="article.source" :id="article._id"/>
   </div>
@@ -40,3 +44,10 @@ export default {
   },
 };
 </script>
+
+<style>
+h5{
+  margin-top: 3em;
+  text-align: center;
+}
+</style>
