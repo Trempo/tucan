@@ -4,32 +4,28 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const port = process.env.PORT || 3000;
+const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 const app = express();
 
-const topHeadlines = {
-    url: "https://newsapi.org/v2/top-headlines?country=co&api",
-    headers: {
-        "Authorization": "Bearer bafd59bee7774729a1a34926e536a998"
-    }
-}
+const articleRoutes = require("./routes/article");
+const userRoutes = require("./routes/user");
 
-app.set("view engine", "ejs");
+
+
+
+mongoose.connect('mongodb://localhost:27017/tucan', { useNewUrlParser: true, useUnifiedTopology: true });
 app.use(morgan("tiny"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use(cors());
+app.use(methodOverride("_method"));
+app.use("/feed", articleRoutes);
 
-app.get("/", (req, res) => {
-    request(topHeadlines, (error, response, body) => {
-        if (!error && response.statusCode == 200) {
-            let data = JSON.parse(body);
-
-            res.send(data["articles"]);
-        }
-    });
+//Solo es para prueba de concepto
+app.use("/list", userRoutes);
 
 
-});
 
 
 app.listen(port, () => {
