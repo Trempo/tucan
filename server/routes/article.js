@@ -10,6 +10,8 @@ const topHeadlines = {
     }
 }
 
+const googleSearchApiKey = 'AIzaSyBH1hipn5acSEiXOdhAHGf5xba15sl2iyI';
+
 router.get("/", (req, res) => {
     request(topHeadlines, (error, response, body) => {
         if (!error && response.statusCode == 200) {
@@ -20,7 +22,7 @@ router.get("/", (req, res) => {
                     title: article.title,
                     source: article.author,
                     url: article.url,
-                    imageurl: article.url,
+                    imageurl: article.urlToImage,
                     description: article.description
                 }
             }));
@@ -31,7 +33,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req,res)=>{
-    console.log(req.body);
     Article.create(req.body).then((article)=>{
         res.json(article);
     }).catch((error)=>{

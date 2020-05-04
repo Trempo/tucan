@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">Tucan</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbar">
+      <a class="navbar-brand" href="/">
+      <img class="logo" src="../src/assets/noun_Tucan_2826476.png" alt="">Tucan</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -15,15 +16,15 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">
-              Super
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="#/list">Mi lista</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#/login">Ingresar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#/list">Registrarse</a>
           </li>
         </ul>
       </div>
@@ -32,7 +33,13 @@
   </div>
 </template>
 <style scoped>
-nav{
-  margin-bottom: 2em;
+img.logo{
+  height: 2em;
+  width: 2em;
+  margin-right: 5px
 }
+nav.navbar{
+  background-color: red;
+}
+
 </style>

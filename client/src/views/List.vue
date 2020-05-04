@@ -2,11 +2,14 @@
 <template>
   <div>
     <div class="container">
-      <h5 v-if="!articles.length">
-        Tu lista esta vacia. Añade lecturas desde Super para que crezca</h5>
+      <h5 v-if="articles.length<1">
+        Tu lista esta vacia. Añade lecturas para que crezca</h5>
     </div>
-    <SavedArticle v-for="article in articles" :key="article._id" :title="article.title"
-    :description="article.description" :source="article.source" :id="article._id"/>
+    <div class="article">
+      <SavedArticle v-for="article in articles" :key="article._id" :title="article.title"
+      :description="article.description" :source="article.source"
+      :id="article._id" :imageurl="article.imageurl"/>
+    </div>
   </div>
 </template>
 
@@ -49,5 +52,7 @@ export default {
 h5{
   margin-top: 3em;
   text-align: center;
+  color: white;
 }
+
 </style>
