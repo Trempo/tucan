@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Super from '../views/Super.vue';
 import List from '../views/List.vue';
 import Login from '../views/Login.vue';
+import Register from '../views/Register.vue';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,12 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
 
   },
 ];

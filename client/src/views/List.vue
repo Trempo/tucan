@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <Navbar/>
     <div class="container">
       <h5 v-if="articles.length<1">
         Tu lista esta vacia. Añade lecturas para que crezca</h5>
@@ -15,6 +16,7 @@
 
 <script>
 import SavedArticle from '@/components/SavedArticle.vue';
+import Navbar from '@/components/Navbar.vue';
 
 // @ is an alias to /src
 const API_URL = 'http://localhost:3000/list';
@@ -24,6 +26,7 @@ export default {
   name: 'List',
   components: {
     SavedArticle,
+    Navbar,
   },
   data: () => ({
     error: '',
