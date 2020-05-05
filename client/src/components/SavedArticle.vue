@@ -75,7 +75,7 @@ a.btn{
   padding: 1em 0;
 }
 .card{
-  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 .btn-primary{
     background-color: #C8153B;

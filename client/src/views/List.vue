@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div id="feed">
     <Navbar/>
     <div class="container">
       <h5 v-if="articles.length<1">
@@ -57,5 +57,7 @@ h5{
   text-align: center;
   color: white;
 }
-
+div#feed{
+  margin: 3em 0.5em;
+}
 </style>

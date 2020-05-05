@@ -2,7 +2,7 @@
   <!-- Default form login -->
   <div class=" card container-sm bg-light">
       <div class="centrar">
-        <h4>Bienvenido!</h4>
+        <h4>¡Bienvenido!</h4>
       </div>
     <form>
         <div class="form-group">
@@ -11,7 +11,7 @@
             id="inputnombre" placeholder="Nombre" name="nombre" required>
         </div>
         <div class="form-group">
-            <label for="inputapellido">Contraseña</label>
+            <label for="inputapellido">Apellido</label>
             <input type="text" class="form-control"
             id="inputapellido" placeholder="Apellido" name="apellido" required>
         </div>
@@ -31,6 +31,7 @@
             <label for="dropdownpaises">País de preferencia</label>
             <select name="pais" id="dropdownpaises" class="form-control">
                 <option value="de">Alemania</option>
+                <option value="sa">Arabia Saudita</option>
                 <option value="ar">Argentina</option>
                 <option value="au">Australia</option>
                 <option value="at">Austria</option>
@@ -44,6 +45,10 @@
                 <option value="cu">Cuba</option>
                 <option value="eg">Egipto</option>
                 <option value="ae">Emiratos Árabes</option>
+                <option value="sk">Eslovaquia</option>
+                <option value="si">Eslovenia</option>
+                <option value="us">Estados Unidos</option>
+                <option value="ph">Filipinas</option>
                 <option value="fr">Francia</option>
                 <option value="gr">Grecia</option>
                 <option value="gr">Grecia</option>
@@ -55,9 +60,30 @@
                 <option value="in">India</option>
                 <option value="it">Italia</option>
                 <option value="jp">Japón</option>
+                <option value="lv">Letonia</option>
                 <option value="lt">Lituania</option>
+                <option value="my">Malasia</option>
+                <option value="ma">Marruecos</option>
+                <option value="mx">México</option>
+                <option value="ng">Nigeria</option>
+                <option value="no">Noruega</option>
+                <option value="nz">Nueva Zelanda</option>
+                <option value="nl">Paises Bajos</option>
+                <option value="pl">Polonia</option>
+                <option value="pt">Portugal</option>
                 <option value="cz">República Checa</option>
+                <option value="ro">Rumania</option>
+                <option value="ru">Rusia</option>
+                <option value="rs">Serbia</option>
+                <option value="sg">Singapur</option>
+                <option value="se">Suecia</option>
                 <option value="ch">Suiza</option>
+                <option value="za">Suráfrica</option>
+                <option value="th">Tailandia</option>
+                <option value="tw">Taiwán</option>
+                <option value="tr">Turquía</option>
+                <option value="ua">Ucrania</option>
+                <option value="ve">Venezuela</option>
             </select>
         </div>
         <div class="form-group">
@@ -100,5 +126,8 @@ button{
 }
 .btn-primary:not(:disabled):not(.disabled):active{
   background-color: #2f6a50;
+}
+.card{
+  box-shadow: 0 0 10px rgba(0, 0, 0, .7);
 }
 </style>

@@ -2,7 +2,7 @@
   <!-- Default form login -->
   <div class=" card container-sm bg-light">
       <div class="centrar">
-        <h4>Hola!</h4>
+        <h4>¡Hola!</h4>
       </div>
     <form>
         <div class="form-group">
@@ -57,5 +57,8 @@ button{
 }
 .btn-primary:not(:disabled):not(.disabled):active{
   background-color: #2f6a50;
+}
+.card{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 </style>
