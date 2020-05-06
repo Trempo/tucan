@@ -17,9 +17,10 @@
 <script>
 import SavedArticle from '@/components/SavedArticle.vue';
 import Navbar from '@/components/Navbar.vue';
+import VueJwtDecode from 'vue-jwt-decode';
+import axios from 'axios';
 
 // @ is an alias to /src
-const API_URL = 'http://localhost:3000/list';
 
 
 export default {
@@ -42,11 +43,17 @@ export default {
   }),
 
   mounted() {
-    fetch(API_URL)
-      .then((response) => response.json())
-      .then((result) => {
-        this.articles = result;
-      });
+    this.getFeed();
+  },
+
+  methods: {
+    async getFeed() {
+      const token = localStorage.getItem('jwt');
+      const decoded = VueJwtDecode.decode(token);
+      const response = await axios.get(`/api/user/${decoded.id}/list`);
+      this.articles = response.data;
+      console.log(this.articles);
+    },
   },
 };
 </script>

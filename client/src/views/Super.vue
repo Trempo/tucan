@@ -12,8 +12,9 @@
 import ArticleCard from '@/components/ArticleCard.vue';
 import Navbar from '@/components/Navbar.vue';
 // @ is an alias to /src
-const API_URL = 'http://localhost:3000/feed';
-
+import VueJwtDecode from 'vue-jwt-decode';
+import Axios from 'axios';
+// const API_URL = 'http://localhost:3000/feed';
 
 export default {
   name: 'Super',
@@ -32,13 +33,17 @@ export default {
       description: '',
     },
   }),
-
   mounted() {
-    fetch(API_URL)
-      .then((response) => response.json())
-      .then((result) => {
-        this.articles = result;
-      });
+    this.getFeed();
+  },
+  methods: {
+    async getFeed() {
+      const token = localStorage.getItem('jwt');
+      const decoded = VueJwtDecode.decode(token);
+      const response = await Axios.get(`/api/user/${decoded.id}/feed`);
+      this.articles = response.data;
+      console.log(this.articles);
+    },
   },
 };
 </script>

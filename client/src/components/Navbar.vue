@@ -21,10 +21,7 @@
             <a class="nav-link" href="#/list">Mi lista</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#/login">Ingresar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#/register">Registrarse</a>
+            <a class="nav-link" href="#" @click="userLogOut">Salir</a>
           </li>
         </ul>
       </div>
@@ -35,6 +32,17 @@
 <script>
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      user: {},
+    };
+  },
+  methods: {
+    userLogOut() {
+      localStorage.removeItem('jwt');
+      this.$router.push('/login');
+    },
+  },
 };
 </script>
 <style scoped>

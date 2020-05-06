@@ -21,8 +21,10 @@
 
 <script>
 import $ from 'jquery';
+import axios from 'axios';
+import VueJwtDecode from 'vue-jwt-decode';
 
-const DELETE_URL = 'http://localhost:3000/list';
+
 export default {
   name: 'SavedArticle',
   props: {
@@ -34,20 +36,29 @@ export default {
     id: String,
   },
   methods: {
-    destroy: (id) => {
-      fetch(`${DELETE_URL}/${id}?_method=DELETE`, {
-        method: 'POST',
-        // body: id,
-        headers: {
-          'content-type': 'application/json',
-        },
-      }).then((response) => response.json()).then((result) => {
-        if (result.details) {
-          // there was an error...
-          const error = result.details.map((detail) => detail.message).join('. ');
-          this.error = error;
-        }
-      }).then($(`#${id}`).slideUp(400));
+    async destroy(id) {
+      try {
+        const token = localStorage.getItem('jwt');
+        const decode = VueJwtDecode.decode(token);
+        // const response =
+        await axios.delete(`/api/user/${decode.id}/list/${this.id}`);
+      } catch (error) {
+        console.log(error);
+      }
+      $(`#${id}`).slideUp(400);
+      // fetch(`${DELETE_URL}/${id}?_method=DELETE`, {
+      //   method: 'POST',
+      //   // body: id,
+      //   headers: {
+      //     'content-type': 'application/json',
+      //   },
+      // }).then((response) => response.json()).then((result) => {
+      //   if (result.details) {
+      //     // there was an error...
+      //     const error = result.details.map((detail) => detail.message).join('. ');
+      //     this.error = error;
+      //   }
+      // }).then($(`#${id}`).slideUp(400));
     },
   },
 };

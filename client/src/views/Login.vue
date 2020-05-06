@@ -1,37 +1,69 @@
 <template>
   <!-- Default form login -->
-  <div class=" card container-sm bg-light">
-      <div class="centrar">
-        <h4>¡Hola!</h4>
-      </div>
-    <form>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Correo electrónico</label>
-            <input type="email" class="form-control" id="exampleInputEmail1"
-             aria-describedby="emailHelp" placeholder="Ingresa tu correo" name="email" required>
-            <small id="emailHelp" class="form-text text-muted">
-                No compartiremos tus datos con nadie</small>
+  <div>
+    <div v-if="error" class="alert alert-dismissible alert-danger container">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{error}}
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control"
-            id="exampleInputPassword1" placeholder="Contraseña" name="password" required>
-        </div>
-        <div class="form-group">
-            <div class="centrar">
-                <button type="submit" class="btn btn-primary btn-lg">Iniciar sesión</button>
+      <div class=" card container-sm bg-light">
+          <div class="centrar">
+            <h4>¡Hola!</h4>
+          </div>
+        <form @submit.prevent="loginUser">
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" class="form-control" id="email"
+                aria-describedby="emailHelp"
+                placeholder="Ingresa tu correo" name="email" required v-model="login.email">
+                <small id="emailHelp" class="form-text text-muted">
+                    No compartiremos tus datos con nadie</small>
             </div>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" class="form-control"
+                id="password" placeholder="Contraseña"
+                name="password" v-model="login.password" required>
+            </div>
+            <div class="form-group">
+                <div class="centrar">
+                    <button id="submit" type="submit"
+                     class="btn btn-primary btn-lg">Iniciar sesión</button>
+                </div>
+            </div>
+            <a href="#/register">Registrate aquí</a>
+        </form>
+      </div>
   </div>
   <!-- Default form login -->
 </template>
 <script>
 // import router from '../router'
+import axios from 'axios';
 
 export default {
   name: 'Login',
+  data() {
+    return {
+      login: {
+        email: '',
+        password: '',
+      },
+      error: '',
+    };
+  },
   methods: {
+    async loginUser() {
+      try {
+        const response = await axios.post('/api/auth/login', this.login);
+        const { token } = response.data;
+        localStorage.setItem('jwt', token);
+        if (token) {
+          this.$router.push('/');
+        }
+      } catch (err) {
+        this.error = (err.response.data.error);
+      }
+    },
   },
 };
 </script>
@@ -48,7 +80,7 @@ form{
     text-align: center;
     align-content: center;
 }
-button{
+button#submit{
     margin-top: 0.5em;
 }
 .btn-primary{
@@ -60,5 +92,8 @@ button{
 }
 .card{
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+.alert-dismissible .close {
+    padding: 0.5rem 1.25rem;
 }
 </style>

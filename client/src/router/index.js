@@ -12,11 +12,17 @@ const routes = [
     path: '/',
     name: 'Super',
     component: Super,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/list',
     name: 'List',
     component: List,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/login',
@@ -34,6 +40,20 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem('jwt') == null) {
+      next({
+        path: '/login',
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

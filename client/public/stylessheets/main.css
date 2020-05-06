@@ -4,6 +4,13 @@ body{
     padding-bottom: 0;
     background-color: #343a40;
 }
+.alert-success{
+    background-color: #619165;
+}
+
+.alert-danger{
+    background-color: #C8153B;
+}
 /* nav#navbar{
     background-color: red !important;
 } */

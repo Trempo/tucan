@@ -21,7 +21,10 @@
 </template>
 
 <script>
-const API_URL = 'http://localhost:3000/feed';
+import axios from 'axios';
+import VueJwtDecode from 'vue-jwt-decode';
+
+// const API_URL = 'http://localhost:3000/feed';
 export default {
   name: 'ArticleCard',
   props: {
@@ -32,7 +35,7 @@ export default {
     description: String,
   },
   methods: {
-    submit: (pTitle, pSource, pUrl, pImageurl, pDescription) => {
+    async submit(pTitle, pSource, pUrl, pImageurl, pDescription) {
       const newArticle = {
         title: pTitle,
         source: pSource,
@@ -40,21 +43,14 @@ export default {
         imageurl: pImageurl,
         description: pDescription,
       };
-      fetch(API_URL, {
-        method: 'POST',
-        body: JSON.stringify(newArticle),
-        headers: {
-          'content-type': 'application/json',
-        },
-      }).then((response) => response.json()).then((result) => {
-        if (result.details) {
-          // there was an error...
-          const error = result.details.map((detail) => detail.message).join('. ');
-          this.error = error;
-        } else {
-          // this.error = '';
-        }
-      });
+      try {
+        const token = localStorage.getItem('jwt');
+        const decoded = VueJwtDecode.decode(token);
+        // const response =
+        await axios.post(`/api/user/${decoded.id}/list`, newArticle);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
