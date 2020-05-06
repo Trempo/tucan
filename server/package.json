@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Tucan es una aplicacion web para ver los principales titulares de noticias utilizando la API de NewsAPI.org",
   "main": "app.js",
+  "engines": {
+    "node": "13.13.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
