@@ -2,7 +2,10 @@ body{
     font-family: 'Roboto', sans-serif;
     padding: 2em 0.5em;
     padding-bottom: 0;
-    background-color: #343a40;
+    /* background-color: #343a40; */
+    background: #619165;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #619165, #414345);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #619165, #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .alert-success{
     background-color: #619165;
@@ -11,6 +14,20 @@ body{
 .alert-danger{
     background-color: #C8153B;
 }
+.card{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 25px;
+}
+.card img{
+    border-radius: 25px 25px 0 0;
+}
+@media (min-width: 768px){
+    .card img{
+        border-radius: 25px 0 0 25px;
+    }
+} 
+  
 /* nav#navbar{
     background-color: red !important;
 } */

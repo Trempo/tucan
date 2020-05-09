@@ -1,7 +1,7 @@
 
 <template>
   <div id="feed">
-    <Navbar/>
+    <Navbar :firstName="firstName"/>
     <ArticleCard v-for="article in articles" :key="article._id" :title="article.title"
     :description="article.description" :source="article.source"
      :url="article.url" :imageurl="article.imageurl"/>
@@ -32,6 +32,7 @@ export default {
       imageurl: '',
       description: '',
     },
+    firstName: '',
   }),
   mounted() {
     this.getFeed();
@@ -41,8 +42,9 @@ export default {
       const token = localStorage.getItem('jwt');
       const decoded = VueJwtDecode.decode(token);
       const response = await Axios.get(`/api/user/${decoded.id}/feed`);
+      const user = await Axios.get(`/api/user/${decoded.id}`);
+      this.firstName = user.data.user.firstName;
       this.articles = response.data;
-      console.log(this.articles);
     },
   },
 };

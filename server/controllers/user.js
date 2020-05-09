@@ -80,7 +80,7 @@ exports.update = async function(req, res){
         
         if(userId.toString() !== id.toString()) return res.status(400).json({message: "No tienes permiso para eso"});
 
-        const user = await User.findOneAndUpdate({_id: id}, {$set: update}, {new:true});
+        const user = await User.updateOne({_id: id}, {$set: update}, {new:true});
 
         res.status(200).json({user,message:"El usuario fue actualizado"});
 

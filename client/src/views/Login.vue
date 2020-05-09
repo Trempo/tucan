@@ -2,9 +2,13 @@
   <!-- Default form login -->
   <div>
     <div v-if="error" class="alert alert-dismissible alert-danger container">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{error}}
-        </div>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{error}}
+    </div>
+    <div v-if="message" class="alert alert-dismissible alert-success container">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{message}}
+    </div>
       <div class=" card container-sm bg-light">
           <div class="centrar">
             <h4>¡Hola!</h4>
@@ -49,7 +53,13 @@ export default {
         password: '',
       },
       error: '',
+      message: '',
     };
+  },
+  mounted() {
+    if (this.$route.params.verifytoken) {
+      this.verifyUser();
+    }
   },
   methods: {
     async loginUser() {
@@ -57,11 +67,25 @@ export default {
         const response = await axios.post('/api/auth/login', this.login);
         const { token } = response.data;
         localStorage.setItem('jwt', token);
+        console.log(response.data);
         if (token) {
           this.$router.push('/');
         }
       } catch (err) {
         this.error = (err.response.data.error);
+      }
+    },
+    async verifyUser() {
+      try {
+        const response = await axios.get(`api/auth/verify/${this.$route.params.verifytoken}`);
+
+        if (response.data.error) {
+          this.error = response.data.error;
+        } else {
+          this.message = response.data.message;
+        }
+      } catch (error) {
+        this.error = error.response.data.error;
       }
     },
   },

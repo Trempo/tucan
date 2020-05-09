@@ -60,20 +60,20 @@ exports.verify = async (req, res) => {
         //find matching token
         const token = await Token.findOne({token:req.params.token});
 
-        if(!token) return res.status(400).json({message:"No se encontro un token valido. Su token pudo haber expirado."});
+        if(!token) return res.status(400).json({error:"No se encontro un token valido. Su token pudo haber expirado."});
 
         //if we found a token
         User.findOne({_id:token.userId}, (err, user) => {
-            if(!user) return res.status(400).json({message:"No pudimos encontrar un usuario para este token"});
+            if(!user) return res.status(400).json({error:"No pudimos encontrar un usuario para este token"});
             
-            if(user.isVerified) return res.status(400).json({message: "El usuario ya fue verificado"});
+            if(user.isVerified) return res.status(400).json({error: "El usuario ya fue verificado"});
 
             //verify and save the user
             user.isVerified = true;
             user.save(function (err) {
                 if(err) return res.status(500).json({message:err.message});
 
-                res.status(200).send("La cuenta fue verificada. Inicia sesión");
+                res.status(200).json({message:"La cuenta fue verificada. Inicia sesión"});
             });
         });
     } catch (error) {
@@ -111,8 +111,9 @@ async function sendVerificationEmail(user, req, res){
         let to = user.email;
         let from = process.env.FROM_EMAIL;
         //esto se tiene que cambiar para que el usuario vaya el frontend y el frontend mande el request
-        let link = "https://www.tucan.news/verify/" + token.token;
-        let html = `<p>Hola ${user.firstname}<p><br><p>Por favor da click <a href="${link}">aquí</a> para verificar tu cuenta.</p> 
+        // let link = "http://localhost:8080/#/verify/" + token.token;
+        let link = "https://www.tucan.news/#/verify/" + token.token;
+        let html = `<p>Hola ${user.firstName}<p><br><p>Por favor da click <a href="${link}">aquí</a> para verificar tu cuenta.</p> 
         <br><p>Si no hiciste esto, solo ignoralo.</p>`;
         await sendEmail({to, from, subject, html});
 

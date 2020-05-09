@@ -4,6 +4,7 @@ import Super from '../views/Super.vue';
 import List from '../views/List.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
+import Profile from '../views/Profile.vue';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,18 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+
+  },
+  {
+    path: '/verify/:verifytoken',
+    name: 'Verify',
+    component: Login,
+
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
 
   },
 ];

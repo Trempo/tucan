@@ -1,7 +1,7 @@
 
 <template>
   <div id="feed">
-    <Navbar/>
+    <Navbar :firstName="firstName"/>
     <div class="container">
       <h5 v-if="articles.length<1">
         Tu lista esta vacia. Añade lecturas para que crezca</h5>
@@ -9,7 +9,7 @@
     <div class="article">
       <SavedArticle v-for="article in articles" :key="article._id" :title="article.title"
       :description="article.description" :source="article.source"
-      :id="article._id" :imageurl="article.imageurl"/>
+      :id="article._id" :imageurl="article.imageurl" :url="article.url"/>
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@ export default {
       description: '',
       id: '',
     },
+    firstName: '',
   }),
 
   mounted() {
@@ -51,8 +52,9 @@ export default {
       const token = localStorage.getItem('jwt');
       const decoded = VueJwtDecode.decode(token);
       const response = await axios.get(`/api/user/${decoded.id}/list`);
+      const user = await axios.get(`/api/user/${decoded.id}`);
+      this.firstName = user.data.user.firstName;
       this.articles = response.data;
-      console.log(this.articles);
     },
   },
 };

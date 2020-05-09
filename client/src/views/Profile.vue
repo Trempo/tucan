@@ -1,45 +1,42 @@
+
 <template>
-  <!-- Default form login -->
-  <div>
+  <div id="feed">
+    <Navbar :firstName="user.firstName"/>
+    <div v-if="error" class="alert alert-dismissible alert-danger container">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{error}}
+    </div>
     <div v-if="message" class="alert alert-dismissible alert-success container">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{message}}
     </div>
-    <div class=" card container-sm bg-light">
-        <div class="centrar">
-            <h4>¡Bienvenido!</h4>
-        </div>
-        <form @submit.prevent="registerUser">
+    <div class="container bg-light">
+        <h1>Hola {{user.firstName}}, actualiza tu perfil</h1>
+        <form @submit.prevent="updateUser">
             <div class="form-group">
                 <label for="inputnombre">Nombre</label>
                 <input type="text" class="form-control"
                 id="inputnombre" placeholder="Nombre"
-                 name="nombre" v-model="register.firstName" required>
+                 name="nombre" v-model="user.firstName" required>
             </div>
             <div class="form-group">
                 <label for="inputapellido">Apellido</label>
                 <input type="text" class="form-control"
                 id="inputapellido" placeholder="Apellido"
-                 name="apellido" v-model="register.lastName" required>
+                 name="apellido" v-model="user.lastName" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Correo electrónico</label>
                 <input type="email" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp" placeholder="Ingresa tu correo" name="email"
-                v-model="register.email" required>
+                v-model="user.email" required>
                 <small id="emailHelp" class="form-text text-muted">
                     No compartiremos tus datos con nadie</small>
             </div>
             <div class="form-group">
-                <label for="inputcontraseña">Contraseña</label>
-                <input type="password" class="form-control"
-                id="inputcontraseña" placeholder="Contraseña"
-                 name="password" v-model="register.password" required>
-            </div>
-            <div class="form-group">
                 <label for="dropdownpaises">País de preferencia</label>
                 <select name="pais" id="dropdownpaises"
-                 class="form-control" v-model="register.country" >
+                 class="form-control" v-model="user.country" >
                     <option value="de">Alemania</option>
                     <option value="sa">Arabia Saudita</option>
                     <option value="ar">Argentina</option>
@@ -99,61 +96,74 @@
             <div class="form-group">
                 <div class="centrar">
                     <button id="submit" type="submit"
-                     class="btn btn-primary btn-lg">Registrarse</button>
+                     class="btn btn-primary btn-lg">Actualizar</button>
                 </div>
             </div>
         </form>
     </div>
   </div>
-
-  <!-- Default form login -->
 </template>
+
 <script>
-// import router from '../router'
+import Navbar from '@/components/Navbar.vue';
+// @ is an alias to /src
+import VueJwtDecode from 'vue-jwt-decode';
 import axios from 'axios';
 
 export default {
-  name: 'Register',
-  data() {
-    return {
-      register: {
-        email: '',
-        username: '',
-        password: '',
-        firstName: '',
-        lastName: '',
-        country: '',
-      },
-      message: '',
-    };
+  name: 'Profile',
+  components: {
+    Navbar,
+  },
+  data: () => ({
+    error: '',
+    message: '',
+    user: {
+      email: '',
+      firstName: '',
+      lastName: '',
+      country: '',
+    },
+  }),
+  mounted() {
+    this.getUser();
   },
   methods: {
-    async registerUser() {
+    async getUser() {
+      const token = localStorage.getItem('jwt');
+      const decoded = VueJwtDecode.decode(token);
       try {
-        const response = await axios.post('/api/auth/register', this.register);
-        this.message = response.data.message;
+        const response = await axios.get(`/api/user/${decoded.id}`);
+        this.user = response.data.user;
       } catch (error) {
-        this.message = (`Lo siento, algo ha salido mal. Vuelve a intentarlo. ${error.message}`);
+        this.error = error.response.data.error;
+      }
+    },
+    async updateUser() {
+      try {
+        const token = localStorage.getItem('jwt');
+        const decoded = VueJwtDecode.decode(token);
+        const response = await axios.put(`/api/user/${decoded.id}`, this.user);
+        if (response.data.error) {
+          this.error = response.data.error;
+        } else {
+          this.$router.push('/');
+        }
+      } catch (error) {
+        this.error = `Lo siento, algo ha salido mal. Vuelve a intentarlo. ${error.message}`;
       }
     },
   },
 };
 </script>
 <style scoped>
-.container-sm{
-    margin: 0 auto;
-    padding: 15px;
-    max-width: 500px;
-}
-form{
-    margin: 10px;
-}
-.centrar{
-    text-align: center;
-    align-content: center;
+div.container.bg-light{
+    border-radius: 25px;
+    padding: 4em 4em 0 4em;
+    margin-top: 3.5em;
 }
 button#submit{
-    margin-top: 0.5em;
+    margin: 0.5em 0 1em 0 ;
 }
 .btn-primary{
     background-color: #619165;
@@ -162,8 +172,8 @@ button#submit{
 .btn-primary:not(:disabled):not(.disabled):active{
   background-color: #2f6a50;
 }
-.card{
-  box-shadow: 0 0 10px rgba(0, 0, 0, .7);
+.centrar{
+    align-content: center;
 }
 .alert-dismissible .close {
     padding: 0.5rem 1.25rem;

@@ -46,19 +46,6 @@ export default {
         console.log(error);
       }
       $(`#${id}`).slideUp(400);
-      // fetch(`${DELETE_URL}/${id}?_method=DELETE`, {
-      //   method: 'POST',
-      //   // body: id,
-      //   headers: {
-      //     'content-type': 'application/json',
-      //   },
-      // }).then((response) => response.json()).then((result) => {
-      //   if (result.details) {
-      //     // there was an error...
-      //     const error = result.details.map((detail) => detail.message).join('. ');
-      //     this.error = error;
-      //   }
-      // }).then($(`#${id}`).slideUp(400));
     },
   },
 };
@@ -69,6 +56,7 @@ export default {
 img {
   max-width: 100%;
   height: 100%;
+
 }
 
 .fa-save {
@@ -85,9 +73,6 @@ a.btn{
 .container{
   padding: 1em 0;
 }
-.card{
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-}
 .btn-primary{
     background-color: #C8153B;
 }
@@ -97,9 +82,7 @@ div.col-md-3 {
 div.col-md-9{
   padding-left: 0;
 }
-.card{
-  border: none;
-}
+
 .btn-primary:not(:disabled):not(.disabled):active{
   background-color: #2f6a50;
 }

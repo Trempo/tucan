@@ -1,7 +1,7 @@
 <template>
   <div class="container-sm">
     <div class="card bg-light">
-      <div class="row">
+      <div class="row" v-if="imageurl && imageurl.charAt(4)=='s'">
         <div class="col-md-5">
           <a :href="url" target="_blank"><img class="card-img" :src="imageurl" alt /></a>
         </div>
@@ -11,7 +11,19 @@
             <h6 class="card-subtitle mb-2 text-muted">{{source}}</h6>
             <p class="card-text">{{description}}</p>
             <a v-on:click.prevent="submit(title,source,url,imageurl,description)"
-              href="#" class=" btn btn-primary btn-xs card-link">
+              href="#" class="btn btn-primary btn-xs card-link">
+              <i class="far fa-save"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row" v-else>
+        <div class="col-md">
+          <div class="card-body">
+            <h4 class="card-title"><a :href="url" target="_blank">{{title}}</a></h4>
+            <h6 class="card-subtitle mb-2 text-muted">{{source}}</h6>
+            <p class="card-text">{{description}}</p>
+            <a v-on:click.prevent="submit(title,source,url,imageurl,description)"
+              href="#" class="btn btn-primary btn-xs card-link">
               <i class="far fa-save"></i></a>
           </div>
         </div>
@@ -23,6 +35,7 @@
 <script>
 import axios from 'axios';
 import VueJwtDecode from 'vue-jwt-decode';
+// import $ from 'jquery';
 
 // const API_URL = 'http://localhost:3000/feed';
 export default {
@@ -77,12 +90,10 @@ a.btn{
 .container-sm{
   padding: 1em 0;
 }
-.card{
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-}
 .btn-primary{
   background-color: #619165;
   border-color: #2f6a50;
+  margin: 0 auto;
 }
 
 div.col-md-3 {
@@ -90,10 +101,6 @@ div.col-md-3 {
 }
 div.col-md-9{
   padding-left: 0;
-}
-
-.card{
-  border: none;
 }
 .btn-primary:not(:disabled):not(.disabled):active{
   background-color: #2f6a50;

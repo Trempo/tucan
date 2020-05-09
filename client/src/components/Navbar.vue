@@ -21,6 +21,9 @@
             <a class="nav-link" href="#/list">Mi lista</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="#/profile">{{firstName}}</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#" @click="userLogOut">Salir</a>
           </li>
         </ul>
@@ -32,10 +35,13 @@
 <script>
 export default {
   name: 'Navbar',
-  data() {
-    return {
-      user: {},
-    };
+  // data() {
+  //   return {
+  //     firstName: '',
+  //   };
+  // },
+  props: {
+    firstName: String,
   },
   methods: {
     userLogOut() {
