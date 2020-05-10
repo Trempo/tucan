@@ -1,11 +1,18 @@
+html{
+    height: 100%;
+}
 body{
     font-family: 'Roboto', sans-serif;
     padding: 2em 0.5em;
     padding-bottom: 0;
     /* background-color: #343a40; */
-    background: #619165;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #619165, #414345);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #619165, #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #414345;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #414345, #619165);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #414345, #619165); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
 }
 .alert-success{
     background-color: #619165;

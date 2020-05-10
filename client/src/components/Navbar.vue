@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
       <a class="navbar-brand" href="/">
       <img class="logo" src="../assets/noun_Tucan_2826476.png" alt="">Tucan</a>
       <button
@@ -33,6 +33,15 @@
   </div>
 </template>
 <script>
+import $ from 'jquery';
+
+$(() => {
+  $(document).scroll(function () {
+    const $nav = $('#navbar');
+    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+  });
+});
+
 export default {
   name: 'Navbar',
   // data() {
@@ -58,7 +67,10 @@ img.logo{
   margin-right: 5px
 }
 nav.navbar{
-  background-color: red;
+  background-color: transparent;
 }
-
+.navbar.scrolled {
+    background: #619165;
+    transition: background 500ms;
+}
 </style>

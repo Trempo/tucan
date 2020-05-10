@@ -1,10 +1,22 @@
 <template>
 <div class="container" :id="id">
     <div class="card bg-light">
-      <div class="row">
+      <div class="row" v-if="imageurl && imageurl.charAt(4)=='s'">
         <div class="col-md-5">
           <img class="card-img" v-if="imageurl" :src="imageurl" alt /></div>
         <div class="col-md-7">
+          <div class="card-body">
+          <h4 class="card-title"><a :href="url" target="_blank">{{title}}</a></h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{source}}</h6>
+          <p class="card-text">{{description}}</p>
+          <a v-on:click.prevent="destroy(id)"
+         href="#" class="btn btn-primary btn-xslg card-link">
+          <i class="far fa-trash-alt"></i></a>
+        </div>
+        </div>
+      </div>
+      <div class="row" v-else>
+        <div class="col-md">
           <div class="card-body">
           <h4 class="card-title"><a :href="url" target="_blank">{{title}}</a></h4>
           <h6 class="card-subtitle mb-2 text-muted">{{source}}</h6>
