@@ -1,6 +1,6 @@
 <template>
 <div class="container" :id="id">
-    <div class="card bg-light">
+    <div class="card">
       <div class="row" v-if="imageurl && imageurl.charAt(4)=='s'">
         <div class="col-md-5">
           <img class="card-img" v-if="imageurl" :src="imageurl" alt /></div>

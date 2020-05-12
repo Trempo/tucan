@@ -1,15 +1,15 @@
 <template>
   <!-- Default form login -->
   <div>
-    <div v-if="error" class="alert alert-dismissible alert-danger container">
+    <div v-if="error" class="alert alert-dismissible alert-danger container fixed-top">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{error}}
     </div>
-    <div v-if="message" class="alert alert-dismissible alert-success container">
+    <div v-if="message" class="alert alert-dismissible alert-success container fixed-top">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{message}}
     </div>
-      <div class=" card container-sm bg-light">
+      <div class=" card container-sm">
           <div class="centrar">
             <h4>¡Hola!</h4>
           </div>
@@ -114,10 +114,13 @@ button#submit{
 .btn-primary:not(:disabled):not(.disabled):active{
   background-color: #2f6a50;
 }
-.card{
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-}
 .alert-dismissible .close {
     padding: 0.5rem 1.25rem;
+}
+div.alert-success{
+  margin-top: 1em;
+}
+div.alert-danger{
+  margin-top: 5em;
 }
 </style>

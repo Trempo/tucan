@@ -64,7 +64,6 @@ export default {
 h5{
   margin-top: 3em;
   text-align: center;
-  color: white;
 }
 div#feed{
   margin: 3em 0.5em;

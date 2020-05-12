@@ -1,11 +1,15 @@
 <template>
   <!-- Default form login -->
   <div>
-    <div v-if="message" class="alert alert-dismissible alert-success container">
+    <div v-if="message" class="alert alert-dismissible alert-success container fixed-top">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{message}}
     </div>
-    <div class=" card container-sm bg-light">
+    <div v-if="error" class="alert alert-dismissible alert-danger container fixed-top">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{error.substring(error.indexOf('":"')+3,error.indexOf('"}'))}}
+    </div>
+    <div class=" card container-sm">
         <div class="centrar">
             <h4>¡Bienvenido!</h4>
         </div>
@@ -102,6 +106,7 @@
                      class="btn btn-primary btn-lg">Registrarse</button>
                 </div>
             </div>
+            <a href="#/login">Inicia sesión aquí</a>
         </form>
     </div>
   </div>
@@ -125,6 +130,7 @@ export default {
         country: '',
       },
       message: '',
+      error: '',
     };
   },
   methods: {
@@ -133,7 +139,7 @@ export default {
         const response = await axios.post('/api/auth/register', this.register);
         this.message = response.data.message;
       } catch (error) {
-        this.message = (`Lo siento, algo ha salido mal. Vuelve a intentarlo. ${error.message}`);
+        this.error = JSON.stringify(error.response.data.error);
       }
     },
   },
@@ -162,10 +168,13 @@ button#submit{
 .btn-primary:not(:disabled):not(.disabled):active{
   background-color: #2f6a50;
 }
-.card{
-  box-shadow: 0 0 10px rgba(0, 0, 0, .7);
-}
 .alert-dismissible .close {
     padding: 0.5rem 1.25rem;
+}
+div.alert-success{
+  margin-top: 1em;
+}
+div.alert-danger{
+  margin-top: 5em;
 }
 </style>

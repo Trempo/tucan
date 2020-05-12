@@ -1,6 +1,6 @@
 <template>
   <div class="container-sm">
-    <div class="card bg-light">
+    <div class="card">
       <div class="row" v-if="imageurl && imageurl.charAt(4)=='s'">
         <div class="col-md-5">
           <a :href="url" target="_blank"><img class="card-img" :src="imageurl" alt /></a>

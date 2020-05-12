@@ -6,9 +6,7 @@ body{
     padding: 2em 0.5em;
     padding-bottom: 0;
     /* background-color: #343a40; */
-    background: #414345;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #414345, #619165);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #414345, #619165); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: white;  /* fallback for old browsers */
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -22,7 +20,6 @@ body{
     background-color: #C8153B;
 }
 .card{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
     border: none;
     border-radius: 25px;
 }
@@ -34,7 +31,6 @@ body{
         border-radius: 25px 0 0 25px;
     }
 } 
-  
-/* nav#navbar{
-    background-color: red !important;
-} */
+input.form-control,select.form-control{
+    border-radius: 25px;
+  }

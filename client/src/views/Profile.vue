@@ -10,7 +10,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{message}}
     </div>
-    <div class="container bg-light">
+    <div class="container">
         <h1>Hola {{user.firstName}}, actualiza tu perfil</h1>
         <form @submit.prevent="updateUser">
             <div class="form-group">
@@ -157,10 +157,9 @@ export default {
 };
 </script>
 <style scoped>
-div.container.bg-light{
+div.container{
     border-radius: 25px;
-    padding: 4em 4em 0 4em;
-    margin-top: 3.5em;
+    padding: 2.5em 4em 0 4em;
 }
 button#submit{
     margin: 0.5em 0 1em 0 ;

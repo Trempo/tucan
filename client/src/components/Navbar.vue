@@ -33,15 +33,6 @@
   </div>
 </template>
 <script>
-import $ from 'jquery';
-
-$(() => {
-  $(document).scroll(function () {
-    const $nav = $('#navbar');
-    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-  });
-});
-
 export default {
   name: 'Navbar',
   // data() {
@@ -67,10 +58,7 @@ img.logo{
   margin-right: 5px
 }
 nav.navbar{
-  background-color: transparent;
+  background-color: #619165;
 }
-.navbar.scrolled {
-    background: #619165;
-    transition: background 500ms;
-}
+
 </style>

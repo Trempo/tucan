@@ -13,7 +13,7 @@ router.get("/", (req,res)=>{
 
 router.post("/register", [
     check('email').isEmail().withMessage('Ingresa un correo valido'),
-    check('password').not().isEmpty().isLength({min: 6}).withMessage('La contraseña debe tener más de 6 caracteres'),
+    check('password').not().isEmpty().isLength({min: 8}).withMessage('La contraseña debe tener más de 8 caracteres'),
     check('firstName').not().isEmpty().withMessage('Tu nombre es requerido'),
     check('lastName').not().isEmpty().withMessage('Tu apellido es requerido')
 ], validate, Auth.register);

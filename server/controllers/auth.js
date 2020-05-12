@@ -36,10 +36,10 @@ exports.login = async (req, res) => {
 
         //validate password 
 
-        if(!user.comparePassword(password)) return res.status(401).json({message: "Correo o contraseña incorrectos."});
+        if(!user.comparePassword(password)) return res.status(401).json({error: "Correo o contraseña incorrectos."});
 
         //make sure the user has been verified
-        if(!user.isVerified) return res.status(401).json({type: 'non-verified', message:"Tu cuenta no ha sido verificada."});
+        if(!user.isVerified) return res.status(401).json({type: 'non-verified', error:"Tu cuenta no ha sido verificada."});
 
         //login successfull, write token, and send back user
         res.status(200).json({token:user.generateJWT(),user:user});
