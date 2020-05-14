@@ -2,15 +2,15 @@
 <template>
   <div id="feed">
     <Navbar :firstName="user.firstName"/>
-    <div v-if="error" class="alert alert-dismissible alert-danger container">
+    <div v-if="error" class="alert alert-dismissible alert-danger container fixed-top">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{error}}
     </div>
-    <div v-if="message" class="alert alert-dismissible alert-success container">
+    <div v-if="message" class="alert alert-dismissible alert-success container fixed-top">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{message}}
     </div>
-    <div class="container">
+    <div class="container profile">
         <h1>Hola {{user.firstName}}, actualiza tu perfil</h1>
         <form @submit.prevent="updateUser">
             <div class="form-group">
@@ -31,7 +31,8 @@
                 aria-describedby="emailHelp" placeholder="Ingresa tu correo" name="email"
                 v-model="user.email" required>
                 <small id="emailHelp" class="form-text text-muted">
-                    No compartiremos tus datos con nadie</small>
+                    Asegurate de tener acceso al correo si vas a cambiarlo,
+                     no podrás acceder a tu cuenta de lo contrario.</small>
             </div>
             <div class="form-group">
                 <label for="dropdownpaises">País de preferencia</label>
@@ -92,6 +93,19 @@
                     <option value="ua">Ucrania</option>
                     <option value="ve">Venezuela</option>
                 </select>
+                <small id="countryHelp" class="form-text text-muted">
+                    Esto definirá de donde provienen las noticias de tu bandeja principal.</small>
+            </div>
+            <div class="form-group">
+              <label for="resetpasswordbutton">Restablecer contraseña</label>
+              <div>
+              <button name="resetpasswordbutton"
+              id="resetpasswordbutton" class="btn btn-warning btn-md" type="button"
+              @click="resetPassword">
+                Restablece tu contraseña dando click aquí</button>
+                <small id="countryHelp" class="form-text text-muted">
+                    Se te enviará un correo con los siguientes pasos.</small>
+              </div>
             </div>
             <div class="form-group">
                 <div class="centrar">
@@ -123,6 +137,7 @@ export default {
       firstName: '',
       lastName: '',
       country: '',
+      id: '',
     },
   }),
   mounted() {
@@ -134,7 +149,12 @@ export default {
       const decoded = VueJwtDecode.decode(token);
       try {
         const response = await axios.get(`/api/user/${decoded.id}`);
-        this.user = response.data.user;
+        this.user.email = response.data.user.email;
+        this.user.firstName = response.data.user.firstName;
+        this.user.lastName = response.data.user.lastName;
+        this.user.country = response.data.user.country;
+        /* eslint no-underscore-dangle: 0 */
+        this.user.id = response.data.user._id;
       } catch (error) {
         this.error = error.response.data.error;
       }
@@ -153,11 +173,19 @@ export default {
         this.error = `Lo siento, algo ha salido mal. Vuelve a intentarlo. ${error.message}`;
       }
     },
+    async resetPassword() {
+      try {
+        const response = await axios.post('/api/auth/recover', { email: this.user.email });
+        this.message = response.data.message;
+      } catch (error) {
+        this.error = error.response.data.error;
+      }
+    },
   },
 };
 </script>
 <style scoped>
-div.container{
+div.container.profile{
     border-radius: 25px;
     padding: 2.5em 4em 0 4em;
 }
@@ -176,5 +204,11 @@ button#submit{
 }
 .alert-dismissible .close {
     padding: 0.5rem 1.25rem;
+}
+div.alert-success{
+  margin-top: 5em;
+}
+div.alert-danger{
+  margin-top: 9em;
 }
 </style>

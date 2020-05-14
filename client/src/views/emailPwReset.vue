@@ -11,32 +11,23 @@
     </div>
       <div class=" card container-sm">
           <div class="centrar">
-            <h4>¡Hola!</h4>
+            <h4>¿Olvidaste tu contraseña?</h4>
           </div>
-        <form @submit.prevent="loginUser">
+        <form @submit.prevent="emailforpwreset">
             <div class="form-group">
-                <label for="email">Correo electrónico</label>
+                <label for="email">Correo</label>
                 <input type="email" class="form-control" id="email"
                 aria-describedby="emailHelp"
-                placeholder="Ingresa tu correo" name="email" required v-model="login.email">
+                placeholder="Ingresa tu correo"
+                name="email" required v-model="email">
                 <small id="emailHelp" class="form-text text-muted">
-                    No compartiremos tus datos con nadie</small>
-            </div>
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" class="form-control"
-                id="password" placeholder="Contraseña"
-                name="password" v-model="login.password" required>
+                    Te llegará un correo con las siguientes instrucciones</small>
             </div>
             <div class="form-group">
                 <div class="centrar">
                     <button id="submit" type="submit"
-                     class="btn btn-primary btn-lg">Iniciar sesión</button>
+                     class="btn btn-primary btn-lg">Enviar</button>
                 </div>
-            </div>
-            <div class="links">
-              <a href="#/register">Registrate aquí</a>
-              <a href="#/recover">Restablece tu contraseña</a>
             </div>
         </form>
       </div>
@@ -48,45 +39,19 @@
 import axios from 'axios';
 
 export default {
-  name: 'Login',
+  name: 'emailPwReset',
   data() {
     return {
-      login: {
-        email: '',
-        password: '',
-      },
+      email: '',
       error: '',
       message: '',
     };
   },
-  mounted() {
-    if (this.$route.params.verifytoken) {
-      this.verifyUser();
-    }
-  },
   methods: {
-    async loginUser() {
+    async emailforpwreset() {
       try {
-        const response = await axios.post('/api/auth/login', this.login);
-        const { token } = response.data;
-        localStorage.setItem('jwt', token);
-        axios.defaults.headers.common = { Authorization: `Bearer ${localStorage.getItem('jwt')}` };
-        if (token) {
-          this.$router.push('/');
-        }
-      } catch (err) {
-        this.error = (err.response.data.error);
-      }
-    },
-    async verifyUser() {
-      try {
-        const response = await axios.get(`api/auth/verify/${this.$route.params.verifytoken}`);
-
-        if (response.data.error) {
-          this.error = response.data.error;
-        } else {
-          this.message = response.data.message;
-        }
+        const response = await axios.post('/api/auth/recover', { email: this.email });
+        this.message = response.data.message;
       } catch (error) {
         this.error = error.response.data.error;
       }
@@ -125,9 +90,5 @@ div.alert-success{
 }
 div.alert-danger{
   margin-top: 5em;
-}
-div.links{
-  display: flex;
-  justify-content: space-between;
 }
 </style>

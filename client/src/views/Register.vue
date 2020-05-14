@@ -41,6 +41,12 @@
                  name="password" v-model="register.password" required>
             </div>
             <div class="form-group">
+                <label for="inputcontraseñaconfirm">Confirma tu contraseña</label>
+                <input type="password" class="form-control"
+                id="inputcontraseñaconfirm" placeholder="Contraseña"
+                 name="confirmPassword" v-model="register.confirmPassword" required>
+            </div>
+            <div class="form-group">
                 <label for="dropdownpaises">País de preferencia</label>
                 <select name="pais" id="dropdownpaises"
                  class="form-control" v-model="register.country" >
@@ -99,6 +105,8 @@
                     <option value="ua">Ucrania</option>
                     <option value="ve">Venezuela</option>
                 </select>
+                <small id="countryHelp" class="form-text text-muted">
+                    Esto definirá de donde provienen las noticias de tu bandeja principal</small>
             </div>
             <div class="form-group">
                 <div class="centrar">
@@ -123,8 +131,8 @@ export default {
     return {
       register: {
         email: '',
-        username: '',
         password: '',
+        confirmPassword: '',
         firstName: '',
         lastName: '',
         country: '',
@@ -135,11 +143,15 @@ export default {
   },
   methods: {
     async registerUser() {
-      try {
-        const response = await axios.post('/api/auth/register', this.register);
-        this.message = response.data.message;
-      } catch (error) {
-        this.error = JSON.stringify(error.response.data.error);
+      if (this.register.confirmPassword === this.register.password) {
+        try {
+          const response = await axios.post('/api/auth/register', this.register);
+          this.message = response.data.message;
+        } catch (error) {
+          this.error = JSON.stringify(error.response.data.error);
+        }
+      } else {
+        this.error = '{"password":"Las contraseñas deben ser iguales"}';
       }
     },
   },

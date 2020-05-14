@@ -89,11 +89,9 @@ userSchema.methods.generateJWT = function(){
     let payload = {
         id: this._id,
         email: this.email,
-        username: this.username,
         firstname: this.firstName,
         lastname: this.lastName,
     };
-
     return jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: parseInt(expirationDate.getTime()/1000, 10)
     });

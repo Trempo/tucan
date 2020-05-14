@@ -8,7 +8,7 @@ const User = require("../controllers/user");
 const validate = require("../middleware/validate");
 
 //INDEX
-router.get("/", User.index);
+// router.get("/", User.index);
 
 //STORE
 router.post('/', [

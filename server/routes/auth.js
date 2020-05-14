@@ -35,7 +35,7 @@ router.post("/recover", [
 router.get("/reset/:token", Password.reset);
 
 router.post('/reset/:token', [
-    check('password').not().isEmpty().isLength({min: 6}).withMessage('La contraseña debe tener más de 6 caracteres'),
+    check('password').not().isEmpty().isLength({min: 8}).withMessage('La contraseña debe tener más de 8 caracteres'),
     check('confirmPassword', 'Las contraseñas no son iguales').custom((value, {req}) => (value === req.body.password)),
 ], validate, Password.resetPassword);
 

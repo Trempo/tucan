@@ -40,7 +40,7 @@ exports.store = async (req, res) => {
         let to = user.email;
         let from = process.env.FROM_EMAIL;
         let link = "http://" + req.headers.host + "/api/auth/reset/" + user.resetPasswordToken;
-        let html = `<p>Hola ${user.username}<p><br><p>Se creo una cuenta de ${domain}. Por favor ve a <a href="${link}">link</a> tpara establecer una contraseña e iniciar sesión.</p> 
+        let html = `<p>Hola ${user.firstName}<p><br><p>Se creo una cuenta de ${domain}. Por favor ve a <a href="${link}">link</a> tpara establecer una contraseña e iniciar sesión.</p> 
                   <br><p>Si no hiciste eso, solo ignora este correo</p>`
 
         await sendEmail({to, from, subject, html});

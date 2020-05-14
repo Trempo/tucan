@@ -11,32 +11,27 @@
     </div>
       <div class=" card container-sm">
           <div class="centrar">
-            <h4>¡Hola!</h4>
+            <h4>Restablece tu contraseña</h4>
           </div>
-        <form @submit.prevent="loginUser">
-            <div class="form-group">
-                <label for="email">Correo electrónico</label>
-                <input type="email" class="form-control" id="email"
-                aria-describedby="emailHelp"
-                placeholder="Ingresa tu correo" name="email" required v-model="login.email">
-                <small id="emailHelp" class="form-text text-muted">
-                    No compartiremos tus datos con nadie</small>
-            </div>
+        <form @submit.prevent="passwordReset">
             <div class="form-group">
                 <label for="password">Contraseña</label>
+                <input type="password" class="form-control" id="password"
+                aria-describedby="passwordHelp"
+                placeholder="Ingresa tu nueva contraseña"
+                name="password" required v-model="password">
+            </div>
+            <div class="form-group">
+                <label for="passwordConfirm">Confirma tu contraseña</label>
                 <input type="password" class="form-control"
-                id="password" placeholder="Contraseña"
-                name="password" v-model="login.password" required>
+                id="passwordConfirm" placeholder="Ingresa tu nueva contraseña"
+                name="passwordConfirm" v-model="passwordConfirm" required>
             </div>
             <div class="form-group">
                 <div class="centrar">
                     <button id="submit" type="submit"
-                     class="btn btn-primary btn-lg">Iniciar sesión</button>
+                     class="btn btn-primary btn-lg">Restablecer</button>
                 </div>
-            </div>
-            <div class="links">
-              <a href="#/register">Registrate aquí</a>
-              <a href="#/recover">Restablece tu contraseña</a>
             </div>
         </form>
       </div>
@@ -48,40 +43,32 @@
 import axios from 'axios';
 
 export default {
-  name: 'Login',
+  name: 'passwordReset',
   data() {
     return {
-      login: {
-        email: '',
-        password: '',
-      },
+      password: '',
+      passwordConfirm: '',
       error: '',
       message: '',
     };
   },
   mounted() {
-    if (this.$route.params.verifytoken) {
-      this.verifyUser();
-    }
+    this.reset();
   },
   methods: {
-    async loginUser() {
+    async reset() {
       try {
-        const response = await axios.post('/api/auth/login', this.login);
-        const { token } = response.data;
-        localStorage.setItem('jwt', token);
-        axios.defaults.headers.common = { Authorization: `Bearer ${localStorage.getItem('jwt')}` };
-        if (token) {
-          this.$router.push('/');
+        const response = await axios.get(`/api/auth/reset/${this.$route.params.resettoken}`);
+        if (response.data.error) {
+          this.error = response.data.error;
         }
-      } catch (err) {
-        this.error = (err.response.data.error);
+      } catch (error) {
+        this.error = error.response.data.error;
       }
     },
-    async verifyUser() {
+    async passwordReset() {
       try {
-        const response = await axios.get(`api/auth/verify/${this.$route.params.verifytoken}`);
-
+        const response = await axios.post(`/api/auth/reset/${this.$route.params.resettoken}`, { password: this.password, confirmPassword: this.passwordConfirm });
         if (response.data.error) {
           this.error = response.data.error;
         } else {
@@ -125,9 +112,5 @@ div.alert-success{
 }
 div.alert-danger{
   margin-top: 5em;
-}
-div.links{
-  display: flex;
-  justify-content: space-between;
 }
 </style>

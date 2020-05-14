@@ -5,6 +5,8 @@ import List from '../views/List.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Profile from '../views/Profile.vue';
+import passwordReset from '../views/passwordReset.vue';
+import emailPwReset from '../views/emailPwReset.vue';
 
 Vue.use(VueRouter);
 
@@ -38,9 +40,21 @@ const routes = [
 
   },
   {
+    path: '/recover',
+    name: 'emailPwReset',
+    component: emailPwReset,
+
+  },
+  {
     path: '/verify/:verifytoken',
     name: 'Verify',
     component: Login,
+
+  },
+  {
+    path: '/reset/:resettoken',
+    name: 'passwordReset',
+    component: passwordReset,
 
   },
   {
