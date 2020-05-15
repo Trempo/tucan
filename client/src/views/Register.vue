@@ -18,19 +18,19 @@
                 <label for="inputnombre">Nombre</label>
                 <input type="text" class="form-control"
                 id="inputnombre" placeholder="Nombre"
-                 name="nombre" v-model="register.firstName" required>
+                 name="nombre" v-model="register.firstName" autocomplete="off" required>
             </div>
             <div class="form-group">
                 <label for="inputapellido">Apellido</label>
                 <input type="text" class="form-control"
                 id="inputapellido" placeholder="Apellido"
-                 name="apellido" v-model="register.lastName" required>
+                 name="apellido" v-model="register.lastName" autocomplete="off" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Correo electrónico</label>
                 <input type="email" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp" placeholder="Ingresa tu correo" name="email"
-                v-model="register.email" required>
+                v-model="register.email" autocomplete="off" required>
                 <small id="emailHelp" class="form-text text-muted">
                     No compartiremos tus datos con nadie</small>
             </div>
@@ -38,13 +38,14 @@
                 <label for="inputcontraseña">Contraseña</label>
                 <input type="password" class="form-control"
                 id="inputcontraseña" placeholder="Contraseña"
-                 name="password" v-model="register.password" required>
+                 name="password" v-model="register.password" autocomplete="off" required>
             </div>
             <div class="form-group">
                 <label for="inputcontraseñaconfirm">Confirma tu contraseña</label>
                 <input type="password" class="form-control"
                 id="inputcontraseñaconfirm" placeholder="Contraseña"
-                 name="confirmPassword" v-model="register.confirmPassword" required>
+                 name="confirmPassword" v-model="register.confirmPassword"
+                 autocomplete="off" required>
             </div>
             <div class="form-group">
                 <label for="dropdownpaises">País de preferencia</label>

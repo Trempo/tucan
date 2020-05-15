@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const request = require("request");
 const {check} = require("express-validator");
 const Article = require("../models/article");
 
@@ -27,16 +26,5 @@ router.put('/:id', User.update);
 //DELETE
 router.delete('/:id', User.destroy);
 
-//SHOW MAIN STORIES
-router.get("/:id/feed", User.showMainStories);
-
-//ADD A POST FROM MAINS STORIES
-router.post("/:id/list", User.addArticleList);
-
-//SHOWS THE USER READ LIST
-router.get("/:id/list", User.showArticleList);
-
-//DELETES AN ARTICLE FROM THE READ LIST
-router.delete("/:id/list/:article_id", User.deleteArticleList);
 
 module.exports = router;

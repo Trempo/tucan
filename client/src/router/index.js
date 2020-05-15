@@ -7,6 +7,10 @@ import Register from '../views/Register.vue';
 import Profile from '../views/Profile.vue';
 import passwordReset from '../views/passwordReset.vue';
 import emailPwReset from '../views/emailPwReset.vue';
+import TechFeed from '../views/feeds/techFeed.vue';
+import EconFeed from '../views/feeds/econFeed.vue';
+import SportsFeed from '../views/feeds/sportsFeed.vue';
+import EntertainmentFeed from '../views/feeds/entertainmentFeed.vue';
 
 Vue.use(VueRouter);
 
@@ -62,6 +66,38 @@ const routes = [
     name: 'Profile',
     component: Profile,
 
+  },
+  {
+    path: '/tech',
+    name: 'TechFeed',
+    component: TechFeed,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/econ',
+    name: 'EconFeed',
+    component: EconFeed,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/sports',
+    name: 'SportsFeed',
+    component: SportsFeed,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/entertainment',
+    name: 'EntertainmentFeed',
+    component: EntertainmentFeed,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 

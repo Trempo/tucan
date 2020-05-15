@@ -53,7 +53,7 @@ export default {
         const token = localStorage.getItem('jwt');
         const decode = VueJwtDecode.decode(token);
         // const response =
-        await axios.delete(`/api/user/${decode.id}/list/${this.id}`);
+        await axios.delete(`/api/news/${decode.id}/list/${this.id}`);
       } catch (error) {
         console.log(error);
       }

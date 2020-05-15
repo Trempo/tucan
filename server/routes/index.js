@@ -1,5 +1,6 @@
 const auth = require('./auth');
 const user = require('./user');
+const news = require('./news');
 
 const authenticate = require('../middleware/authenticate');
 
@@ -10,4 +11,5 @@ module.exports = app => {
 
     app.use('/api/auth', auth);
     app.use('/api/user', authenticate, user);
+    app.use('/api/news', authenticate, news)
 };

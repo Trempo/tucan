@@ -60,7 +60,7 @@ export default {
         const token = localStorage.getItem('jwt');
         const decoded = VueJwtDecode.decode(token);
         // const response =
-        await axios.post(`/api/user/${decoded.id}/list`, newArticle);
+        await axios.post(`/api/news/${decoded.id}/list`, newArticle);
       } catch (error) {
         console.log(error);
       }

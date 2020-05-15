@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const Article = require("../models/article");
 const {sendMail} = require("../utils/index");
-const request = require("request");
 
 // @route GET admin/user
 // @desc Returns all users

@@ -14,10 +14,9 @@ import Navbar from '@/components/Navbar.vue';
 // @ is an alias to /src
 import VueJwtDecode from 'vue-jwt-decode';
 import Axios from 'axios';
-// const API_URL = 'http://localhost:3000/feed';
 
 export default {
-  name: 'Super',
+  name: 'entertainmentFeed',
   components: {
     ArticleCard,
     Navbar,
@@ -42,7 +41,7 @@ export default {
       const token = localStorage.getItem('jwt');
       const decoded = VueJwtDecode.decode(token);
       const user = await Axios.get(`/api/user/${decoded.id}`);
-      const response = await Axios.get(`/api/news/${decoded.id}/feed`);
+      const response = await Axios.get(`/api/news/${decoded.id}/entertainmentfeed`);
       this.firstName = user.data.user.firstName;
       this.articles = response.data;
     },

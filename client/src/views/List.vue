@@ -51,7 +51,7 @@ export default {
     async getFeed() {
       const token = localStorage.getItem('jwt');
       const decoded = VueJwtDecode.decode(token);
-      const response = await axios.get(`/api/user/${decoded.id}/list`);
+      const response = await axios.get(`/api/news/${decoded.id}/list`);
       const user = await axios.get(`/api/user/${decoded.id}`);
       this.firstName = user.data.user.firstName;
       this.articles = response.data;
