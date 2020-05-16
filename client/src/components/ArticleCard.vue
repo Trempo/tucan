@@ -11,7 +11,7 @@
             <h6 class="card-subtitle mb-2 text-muted">{{source}}</h6>
             <p class="card-text">{{description}}</p>
             <a v-on:click.prevent="submit(title,source,url,imageurl,description)"
-              href="#" class="btn btn-primary btn-xs card-link">
+              href="#" class="btn btn-primary btn-xs card-link" :id="url">
               <i class="far fa-save"></i></a>
           </div>
         </div>
@@ -23,7 +23,7 @@
             <h6 class="card-subtitle mb-2 text-muted">{{source}}</h6>
             <p class="card-text">{{description}}</p>
             <a v-on:click.prevent="submit(title,source,url,imageurl,description)"
-              href="#" class="btn btn-primary btn-xs card-link">
+              href="#" class="btn btn-primary btn-xs card-link" :id="url">
               <i class="far fa-save"></i></a>
           </div>
         </div>
@@ -35,9 +35,8 @@
 <script>
 import axios from 'axios';
 import VueJwtDecode from 'vue-jwt-decode';
-// import $ from 'jquery';
+import $ from 'jquery';
 
-// const API_URL = 'http://localhost:3000/feed';
 export default {
   name: 'ArticleCard',
   props: {
@@ -61,6 +60,7 @@ export default {
         const decoded = VueJwtDecode.decode(token);
         // const response =
         await axios.post(`/api/news/${decoded.id}/list`, newArticle);
+        $(`a[id="${this.url}"]`).children().attr('class', 'fas fa-check');
       } catch (error) {
         console.log(error);
       }

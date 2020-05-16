@@ -57,7 +57,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      $(`#${id}`).slideUp(400);
+      $(`#${id}`).slideUp(400, () => {
+        $(`#${id}`).remove();
+      });
     },
   },
 };

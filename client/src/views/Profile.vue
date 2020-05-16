@@ -1,7 +1,7 @@
 
 <template>
   <div id="feed">
-    <Navbar :firstName="user.firstName"/>
+    <Navbar :firstName="user.firstName" currentpage="Perfíl"/>
     <div v-if="error" class="alert alert-dismissible alert-danger container fixed-top">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{error}}
@@ -187,7 +187,7 @@ export default {
 <style scoped>
 div.container.profile{
     border-radius: 25px;
-    padding: 2.5em 4em 0 4em;
+    padding: 1em 4em 0 4em;
 }
 button#submit{
     margin: 0.5em 0 1em 0 ;

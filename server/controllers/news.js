@@ -134,6 +134,33 @@ exports.showEntertainmentStories = async function (req, res) {
         res.status(500).json({ message: error.message });
     }
 }
+exports.Search = async function (req, res) {
+    try {
+        const id = req.params.id;
+        const user = await User.findById(id);
+        if (!user) return res.status(401).json({ error: "No se pudo actualizar la bandeja de entrada" });
+        console.log(req.body.search);
+        newsapi.v2.everything({
+            q: req.body.search.query,
+            language: req.body.search.language,
+            pageSize: 100,
+        }).then(response => {
+            const data = response;
+            res.send(data["articles"].map(article => {
+                return {
+                    title: article.title,
+                    source: article.author,
+                    url: article.url,
+                    imageurl: article.urlToImage,
+                    description: article.description
+                }
+            }));
+        });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: error.message });
+    }
+}
 
 
 exports.addArticleList = async function (req, res) {

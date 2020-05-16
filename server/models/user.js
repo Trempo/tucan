@@ -57,7 +57,11 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Article"
         }
-    ]
+    ],
+    userStatus: {
+        type: Number,
+        default: 0,
+    }
 }, {timestamps:true});
 
 userSchema.pre("save", function(next){

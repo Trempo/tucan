@@ -1,7 +1,7 @@
 
 <template>
   <div id="feed">
-    <Navbar :firstName="firstName"/>
+    <Navbar :firstName="firstName" currentpage="Economía"/>
     <ArticleCard v-for="article in articles" :key="article._id" :title="article.title"
     :description="article.description" :source="article.source"
      :url="article.url" :imageurl="article.imageurl"/>
@@ -50,7 +50,4 @@ export default {
 };
 </script>
 <style scoped>
-div#feed{
-  margin: 3em 0.5em;
-}
 </style>

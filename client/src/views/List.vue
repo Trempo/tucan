@@ -1,7 +1,7 @@
 
 <template>
   <div id="feed">
-    <Navbar :firstName="firstName"/>
+    <Navbar :firstName="firstName" currentpage="Mi lista"/>
     <div class="container">
       <h5 v-if="articles.length<1">
         Tu lista esta vacia. Añade lecturas para que crezca</h5>
@@ -65,7 +65,5 @@ h5{
   margin-top: 3em;
   text-align: center;
 }
-div#feed{
-  margin: 3em 0.5em;
-}
+
 </style>

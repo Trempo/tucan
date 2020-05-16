@@ -20,7 +20,7 @@ router.get("/:id/econfeed", News.showEconStories);
 router.get("/:id/sportsfeed", News.showSportsStories);
 
 //SHOW MAIN POLITICS STORIES
-router.get("/:id/politicfeed", News.showEntertainmentStories);
+router.get("/:id/entertainmentfeed", News.showEntertainmentStories);
 
 //ADD A POST FROM MAINS STORIES
 router.post("/:id/list", News.addArticleList);
@@ -30,5 +30,8 @@ router.get("/:id/list", News.showArticleList);
 
 //DELETES AN ARTICLE FROM THE READ LIST
 router.delete("/:id/list/:article_id", News.deleteArticleList);
+
+//SEARCH
+router.post("/:id/search", News.Search);
 
 module.exports = router;

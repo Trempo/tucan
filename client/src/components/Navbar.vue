@@ -3,6 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
       <a class="navbar-brand" href="/">
       <img class="logo" src="../assets/noun_Tucan_2826476.png" alt="">Tucan</a>
+      <div class="mr-auto currentpage">{{currentpage}}</div>
       <button
         class="navbar-toggler"
         type="button"
@@ -14,7 +15,6 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -31,6 +31,9 @@
                   <a class="dropdown-item" href="#/entertainment">Entretenimiento</a>
               </div>
             </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#/search"><i class="fas fa-search"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#/list">Mi lista</a>
@@ -57,11 +60,12 @@ export default {
   // },
   props: {
     firstName: String,
+    currentpage: String,
   },
   methods: {
     userLogOut() {
       localStorage.removeItem('jwt');
-      this.$router.push('/login');
+      this.$router.push('/');
     },
   },
 };
@@ -80,5 +84,13 @@ div.dropdown-menu{
 }
 div.dropdown-menu a{
   border-radius: 25px;
+}
+.currentpage{
+  color: white;
+  border-left: 2px solid rgba(255,255,255,0.2);
+  padding: 1em;
+}
+i{
+  font-size: 20px;
 }
 </style>

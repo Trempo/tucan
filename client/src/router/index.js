@@ -11,12 +11,19 @@ import TechFeed from '../views/feeds/techFeed.vue';
 import EconFeed from '../views/feeds/econFeed.vue';
 import SportsFeed from '../views/feeds/sportsFeed.vue';
 import EntertainmentFeed from '../views/feeds/entertainmentFeed.vue';
+import Landing from '../views/Landing.vue';
+import SearchFeed from '../views/feeds/searchFeed.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
+    name: 'Landing',
+    component: Landing,
+  },
+  {
+    path: '/super',
     name: 'Super',
     component: Super,
     meta: {
@@ -95,6 +102,14 @@ const routes = [
     path: '/entertainment',
     name: 'EntertainmentFeed',
     component: EntertainmentFeed,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/search',
+    name: 'SearchFeed',
+    component: SearchFeed,
     meta: {
       requiresAuth: true,
     },

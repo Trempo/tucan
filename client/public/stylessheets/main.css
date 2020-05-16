@@ -1,15 +1,8 @@
-html{
-    height: 100%;
-}
 body{
     font-family: 'Roboto', sans-serif;
-    padding: 2em 0.5em;
     padding-bottom: 0;
-    /* background-color: #343a40; */
-    background: white;  /* fallback for old browsers */
+    background: white;
     margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     height: 100%;
 }
 .alert-success{
@@ -33,4 +26,10 @@ body{
 } 
 input.form-control,select.form-control{
     border-radius: 25px;
-  }
+}
+div#feed{
+    margin-top: 5em;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+}
