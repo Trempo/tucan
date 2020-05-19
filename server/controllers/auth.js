@@ -90,13 +90,13 @@ exports.resendToken = async (req, res) => {
 
         const user = await User.findOne({email});
 
-        if(!user) return res.status(401).json({message: "El correo " + email + "no esta associado con ninguna cuenta. Vuelve a intentarlo"});
+        if(!user) return res.status(401).json({error: "El correo " + email + "no esta associado con ninguna cuenta. Vuelve a intentarlo"});
 
-        if(user.isVerified) return res.status(400).json({message: "Esta cuenta ya fue verificada. Inicia sesión"});
+        if(user.isVerified) return res.status(400).json({error: "Esta cuenta ya fue verificada. Inicia sesión"});
 
         await sendVerificationEmail(user, req, res);
     } catch (error) {
-        res.status(500).json({message:error.message});
+        res.status(500).json({error:error.message});
     }
 };
 

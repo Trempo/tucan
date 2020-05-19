@@ -13,6 +13,7 @@ import SportsFeed from '../views/feeds/sportsFeed.vue';
 import EntertainmentFeed from '../views/feeds/entertainmentFeed.vue';
 import Landing from '../views/Landing.vue';
 import SearchFeed from '../views/feeds/searchFeed.vue';
+import EmailVerificationResend from '../views/emailVerificationResend.vue';
 
 Vue.use(VueRouter);
 
@@ -113,6 +114,11 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: '/emailverificationresend',
+    name: 'EmailVerificationResend',
+    component: EmailVerificationResend,
   },
 ];
 

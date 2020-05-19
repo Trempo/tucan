@@ -23,7 +23,7 @@ exports.recover = async (req, res) => {
         let subject = "Petición de cambio de contraseña";
         let to = user.email;
         let from = process.env.FROM_EMAIL;
-        let link = "https://tucan.news/#/reset/" + user.resetPasswordToken;
+        let link = "https://www.tucan.news/#/reset/" + user.resetPasswordToken;
         let html = `<p>Hola ${user.firstName}</p>
                     <p>Por favor de click <a href="${link}">aquí</a> para restablecer tu contraseña.</p> 
                     <p>Si no pediste esto, ignoralo, tu contraseña no será cambiada.</p>`;

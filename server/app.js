@@ -31,8 +31,6 @@ require("./middleware/jwt")(passport);
 require("./routes/index")(app);
 
 
-
-
 app.listen(port, () => {
-    console.log("Server online.")
+    console.log("Server online.");
 });
