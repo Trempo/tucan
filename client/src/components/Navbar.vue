@@ -18,6 +18,9 @@
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
+            <a class="nav-link" href="#/search"><i class="fas fa-search"></i></a>
+          </li>
+          <li class="nav-item">
             <div class="dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button"
               id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -31,9 +34,6 @@
                   <a class="dropdown-item" href="#/entertainment">Entretenimiento</a>
               </div>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#/search"><i class="fas fa-search"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#/list">Mi lista</a>

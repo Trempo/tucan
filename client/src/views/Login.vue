@@ -3,7 +3,8 @@
   <div>
     <div v-if="error" class="alert alert-dismissible alert-danger container fixed-top">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{error + "Para obtener otro codigo da click "}}<a href="#/emailverificationresend">aquí</a>
+        {{error + " Si necesitas un nuevo codigo de verificación da click "}}
+        <a href="#/emailverificationresend">aquí</a>
     </div>
     <div v-if="message" class="alert alert-dismissible alert-success container fixed-top">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
